@@ -24,11 +24,13 @@ export class NMLAComponent {
     }
 
     ngAfterViewInit() {
-        this.loader.load('app/ng-module-loader/nml-lazy.module.js#NMLLazyModule').then((factory) => {
-            const module = factory.create(this._injector);
-            const resolver = module.componentFactoryResolver;
-            const cmpFactory = resolver.resolveComponentFactory(NMLBComponent);
-            this._container.createComponent(cmpFactory);
-        });
+        const self = this;
+          self.loader.load('app/ng-module-loader/nml-lazy.module.js#NMLLazyModule').then((factory) => {
+              const module = factory.create(self._injector);
+              const resolver = module.componentFactoryResolver;
+              const cmpFactory = resolver.resolveComponentFactory(NMLBComponent);
+              self._container.createComponent(cmpFactory);
+          });
+
     }
 }

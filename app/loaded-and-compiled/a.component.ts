@@ -16,12 +16,15 @@ export class LACAComponent {
     }
 
     ngAfterViewInit() {
+      const self = this;
+      setTimeout(function() {
         System.import('app/loaded-and-compiled/lac-lazy.module.js').then((module) => {
-            this._compiler.compileModuleAndAllComponentsAsync(module.LACLazyModule)
+            self._compiler.compileModuleAndAllComponentsAsync(module.LACLazyModule)
                 .then((compiled) => {
                     const factory = compiled.componentFactories[0];
-                    this._container.createComponent(factory);
+                    self._container.createComponent(factory);
                 })
         })
+      },5000);
     }
 }
